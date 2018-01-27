@@ -4,3 +4,22 @@
 *.iml
 
 *.xml
+*.gz
+model_saves/lr_1E-01_neurons=10_layers=1_afunc=relu/checkpoint
+*.data-00000-of-00001
+*.index
+*.meta
+model_saves/lr_1E-01_neurons=10_layers=1_afunc=sigmoid/checkpoint
+model_saves/lr_1E-01_neurons=10_layers=2_afunc=relu/checkpoint
+*.DESKTOP-9PLVFVU
+model_saves/lr_5E-01_neurons=50_layers=1_afunc=tanh/checkpoint
+model_saves/lr_1E-01_neurons=10_layers=1_afunc=tanh/checkpoint
+model_saves/lr_1E-01_neurons=10_layers=2_afunc=tanh/checkpoint
+model_saves/lr_1E-01_neurons=10_layers=2_afunc=sigmoid/checkpoint
+model_saves/lr_1E-01_neurons=10_layers=5_afunc=relu/checkpoint
+model_saves/lr_1E-01_neurons=10_layers=5_afunc=sigmoid/checkpoint
+model_saves/lr_1E-01_neurons=10_layers=5_afunc=tanh/checkpoint
+model_saves/lr_1E-01_neurons=20_layers=1_afunc=relu/checkpoint
+model_saves/lr_1E-01_neurons=20_layers=1_afunc=sigmoid/checkpoint
+model_saves/lr_1E-01_neurons=20_layers=1_afunc=tanh/checkpoint
+model_saves/lr_1E-01_neurons=20_layers=2_afunc=relu/checkpoint
