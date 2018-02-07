@@ -23,3 +23,7 @@ model_saves/lr_1E-01_neurons=20_layers=1_afunc=relu/checkpoint
 model_saves/lr_1E-01_neurons=20_layers=1_afunc=sigmoid/checkpoint
 model_saves/lr_1E-01_neurons=20_layers=1_afunc=tanh/checkpoint
 model_saves/lr_1E-01_neurons=20_layers=2_afunc=relu/checkpoint
+*.jpg
+model_saves/batch=1_lr_1E-01_neurons=10_layers=1_afunc=relu/checkpoint
+model_saves/batch=1_lr_1E-01_neurons=10_layers=1_afunc=sigmoid/checkpoint
+model_saves/batch=1_lr_1E-01_neurons=10_layers=1_afunc=tanh/checkpoint

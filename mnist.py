@@ -2,8 +2,18 @@ import tensorflow as tf
 import os
 
 
-LOGDIR = "C:/Users/johna/Documents/Deep Learning/mnist/"
-SAVEDIR = LOGDIR + '/model_saves/'
+LOGDIR = os.path.dirname(__file__)
+SAVEPATH = r'model_saves/'
+SUMMARYPATH = r'model_summaries/'
+SUMDIR = os.path.join(LOGDIR, SUMMARYPATH)
+SAVEDIR = os.path.join(LOGDIR, SAVEPATH)
+
+if not os.path.exists(SAVEDIR):
+    os.mkdir(SAVEDIR)
+
+if not os.path.exists(SUMDIR):
+    os.mkdir(SUMDIR)
+
 mnist = tf.contrib.learn.datasets.mnist.read_data_sets(train_dir=LOGDIR + "data", one_hot=True)
 
 def weight_variable(shape):
@@ -117,7 +127,7 @@ def mnist_model(learning_rate,
 
     # Initialize all variables
     sess.run(tf.global_variables_initializer())
-    writer = tf.summary.FileWriter(LOGDIR + '/model_summaries/'+ hparam)
+    writer = tf.summary.FileWriter(SUMDIR + hparam)
     writer.add_graph(sess.graph)
 
     # Train
@@ -135,12 +145,11 @@ def mnist_model(learning_rate,
         # Training step
         sess.run(train_step, feed_dict={x: batch[0], y_: batch[1]})
 
-def make_hparam_string(learning_rate, num_neurons, num_layers, activation_function):
-    return "lr_%.0E_neurons=%s_layers=%s_afunc=%s" % (learning_rate, num_neurons, num_layers, activation_function)
+def make_hparam_string(batch_size, learning_rate, num_neurons, num_layers, activation_function):
+    return "batch=%d_lr_%.0E_neurons=%s_layers=%s_afunc=%s" % (batch_size, learning_rate, num_neurons, num_layers, activation_function)
 
 def main():
     # Parameters
-    batch_size = 50
     num_epochs = 20000
     display_step = 100
     save_step = 2500
@@ -150,32 +159,34 @@ def main():
     num_classes = 10  # MNIST total classes (0-9 digits)
 
     # Parameter search
+    batch_sizes = [1, 50]
     num_of_neurons = [10,20,50]
     num_of_layers = [1,2,5]
     learning_rates = [0.1,0.3,0.5]
     activation_functions = ['relu','sigmoid','tanh']
 
-    for learning_rate in learning_rates:
-        for neurons in num_of_neurons:
-            for layers in num_of_layers:
-                for activation_function in activation_functions:
-                    hparam = make_hparam_string(learning_rate, neurons, layers, activation_function)
-                    print('Starting run for %s'%hparam)
+    for batch_size in batch_sizes:
+        for learning_rate in learning_rates:
+            for neurons in num_of_neurons:
+                for layers in num_of_layers:
+                    for activation_function in activation_functions:
+                        hparam = make_hparam_string(batch_size, learning_rate, neurons, layers, activation_function)
+                        print('Starting run for %s'%hparam)
 
-                    mnist_model(learning_rate,
-                                batch_size,
-                                num_epochs,
-                                display_step,
-                                neurons,
-                                layers,
-                                num_input,
-                                num_classes,
-                                hparam,
-                                save_step,
-                                activation_function)
+                        mnist_model(learning_rate,
+                                    batch_size,
+                                    num_epochs,
+                                    display_step,
+                                    neurons,
+                                    layers,
+                                    num_input,
+                                    num_classes,
+                                    hparam,
+                                    save_step,
+                                    activation_function)
 
     print('Done training!')
-    print('Run `tensorboard --logdir=%s` to see the results.' % LOGDIR)
+    print('Run `tensorboard --logdir=%s` to see the results.' % SUMDIR)
 
 if __name__ == '__main__':
     main()
